@@ -1,0 +1,18 @@
+iris<-read.csv("iris.csv")
+iris
+str(iris)
+names(iris)
+names(iris)[names(iris)=="X5.1"]<-"sepal_length"
+names(iris)<-gsub("X3.5","sepal_width", names(iris))
+names(iris)<-gsub("X1.4","petal_length", names(iris))
+names(iris)<-gsub("X0.2","petal_width",names(iris))
+names(iris)<-gsub("Iris.setosa","class",names(iris))
+names(iris)
+summary(iris)
+kmeans_sepal = data.frame(iris$sepal_length, iris$sepal_width)
+kmeans_petal = data.frame(iris$petal_length,iris$petal_width)
+sepal = kmeans(kmeans_sepal,3)
+library("cluster")
+clusplot(iris, sepal$cluster, color = TRUE, shade = TRUE, labels = 5, lines = 0)
+petal = kmeans(kmeans_petal,4)
+clusplot(iris, petal$cluster, color = TRUE, shade = TRUE, labels = 5, lines = 0)
